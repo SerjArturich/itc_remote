@@ -12,13 +12,15 @@ int balance = 0;
 cout << "Please enter a number";
 cin >> number;
 
-while(number > 0){
+while(number % 10 == 0){
+number /= 10;
+}
+
+while (number > 0){
 balance = number % 10;
 number /= 10;
-if(balance != 0){
 numbers[sizearray] = balance;
-sizearray ++;
-}
+sizearray++; 
 }
 cout << "Will be a reversed number:  ";
 
