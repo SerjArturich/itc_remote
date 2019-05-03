@@ -7,10 +7,8 @@ int main (){
 	cout << "Please enter the text. ";
 	getline(cin, txt);
 	short value = 0;
-	char latter = ' ';
 	int size = txt.length();
 	int count = 0;
-
 	for(int i = 0; i < size; ++i) {
 		value = (short) txt[i];
 		int j = i + 1;
