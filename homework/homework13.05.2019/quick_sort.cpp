@@ -1,87 +1,97 @@
 #include <iostream>
 using namespace std;
+bool compare(int num1, int num2)
+{
+    if(num1 - num2 < 0)
+	{
+	    return true;
+	}
+    else
+	{
+	    return false;
+	}
+}
 
-void enterArray(int arr[], int size)
+void* enterArray(int arr[], int size)
 {
     for (int i=0; i < size; i++)
        cin >> arr[i]; 
 }
 
-void swap(int* a, int* b) 
+void* swap(int* a, int* b) 
 { 
     int t = *a; 
     *a = *b; 
     *b = t; 
 } 
  
-int partitionSmallBig (int arr[], int low, int high) 
+int partitionSmallBig (int arr[], int low, int high, int num1, int num2) 
 {
     int pivot = arr[high];     
     int i = (low - 1);  
-  
-    for (int j = low; j <= high - 1; j++) 
-    { 
-        if (arr[j] <= pivot) 
-        { 
-            i++;    
-            swap(&arr[i], &arr[j]); 
-        } 
-    } 
-    swap(&arr[i + 1], &arr[high]); 
-    return (i + 1); 
-}
-
-int partitionBigSmall (int arr[], int low, int high)
-{
-    int pivot = arr[high]; 
-    int i = (low - 1);
-
-    for (int j = low; j <= high - 1; j++)
-    {
-        if (arr[j] >= pivot)
-        {
-            i++;
-            swap(&arr[i], &arr[j]);
+    bool comp = compare(num1, num2);
+    if(comp)
+	{
+   	for (int j = low; j <= high - 1; j++) 
+   	   { 
+           if (arr[j] <= pivot) 
+               { 
+               i++;    
+               swap(&arr[i], &arr[j]); 
+               } 
+           } 
+           swap(&arr[i + 1], &arr[high]); 
+           return (i + 1); 
         }
-    }
-    swap(&arr[i + 1], &arr[high]);
-    return (i + 1);
+	else
+	    {
+        for (int j = low; j <= high - 1; j++) 
+           {
+           if (arr[j] >= pivot)
+               {
+               i++;
+               swap(&arr[i], &arr[j]);
+               }
+           }
+           swap(&arr[i + 1], &arr[high]);
+           return (i + 1);
+	
+	    }
 }
- 
-void quickSort (int arr[], int low, int high, bool yesorno ) 
+
+void quickSort (int arr[], int low, int high, int num1, int num2) 
 { 
     if (low < high) 
     { 
-	int mediumarray = 0;
-	if(yesorno == true)
-	{	
-	     mediumarray = partitionBigSmall(arr, low, high); 	
-  	}
-	else	
-	{
-	    mediumarray = partitionSmallBig(arr, low, high);
-
-	}
-        quickSort(arr, low, mediumarray - 1, yesorno); 
-        quickSort(arr, mediumarray + 1, high, yesorno); 
+	int mediumarrayindex = partitionSmallBig(arr, low, high,num1, num2);
+        quickSort(arr, low, mediumarrayindex - 1, num1, num2); 
+        quickSort(arr, mediumarrayindex + 1, high, num1, num2); 
     } 
 } 
+ 
 void printArray(int arr[], int size) 
 { 
     for (int i=0; i < size; i++) 
        cout << arr[i] <<"\t"; ; 
-} 
+}
+ 
 int main() 
 {  
     int size = 0;
+    int number1 = 0;
+    int number2 = 0;
     cout << "Please enter size of array: ";
     cin >> size;
-    int arr[] = {};
+    int* arr = new int[size];
+    cout << "Arays elements is: " << endl;
     enterArray(arr, size);  
-    bool yesorno = 0;
-    cout << "Sort small -> big press click 0 else click 1" ;
-    cin >> yesorno;
-    quickSort(arr, 0, size - 1, yesorno); 
-    printArray(arr, size); 
+    cout << "Enter 2 number" << endl;
+    cout << "In order to sort by ascending order, enter a small number. In order to sort by descending order, enter a big number."
+    <<endl;
+    cin >> number1;
+    cin >> number2;
+    quickSort(arr, 0, size - 1,number1,number2 ); 
+    printArray(arr, size);
+    delete [] arr; 
     return 0; 
 } 
