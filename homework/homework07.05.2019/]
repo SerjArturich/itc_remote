@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+#define epsilion 0.0000001
+
+void my_sqrt(double number){
+	if(number > 0  ){
+        double low = 0;
+        double high = number;
+        double root = 0;
+        while ( high - low > 0){
+		root = high - (high - low) / 2;
+                if (root * root > number){
+                        high = root;
+                }
+		else{
+			low = root;
+		}
+	}
+	cout << "Root of number is: " << root;	
+	}
+	else {
+		 cout << "In negative number cann't give sqrt";
+	} 
+}
+int main ()
+{
+	double number1;
+	cout << "Please enter a number: ";
+	cin >> number1;
+	 my_sqrt(number1);
+
+return 0;
+}
