@@ -106,64 +106,73 @@ istream& operator >> (istream& stream, Chees& other)
 
 
 int main (){
-/*    enum Figurs {
-        KING,
+    enum Figurs {
+        KING = 1,
         QUEEN,
         BOAT,
         ELEPHANT,
         HORSE,
         WARRIOR
     };
-*/
 
+Figurs figurs = KING;
+int figureNumber =0;
+bool exit = true;
 Chees chees;
-int figure = 0;
-cout << "Pleas enter figure in chess (1-> King or 2-> Queen or 3-> Boat or 4-> Elephant or 5-> Horse or 6-> Warrior). " 
-<< endl;
-cin >> figure;
+cout << "Pleas enter begin coordinates of figure, then end coordinates of figure." << endl;
 cin >> chees;
 
-switch (figure)
-{
-	case 1:
-	{
-		chees.King();
-		break;
-	}  
-	
-	case 2:
-	{
-		chees.Queen();
-		break;				
-	}
+while(exit){
+	cout << "Pleas enter figure in chess (1-> King or 2-> Queen or 3-> Boat or 4-> Elephant or 5-> Horse or 6-> Warrior). " 
+         << endl;
+	cin >> figureNumber;
 
-	case 3:
+	switch (figureNumber)
 	{
-		chees.Boat();
-		break;
-	}
+		case (KING):
+		{
+			chees.King();
+			break;
+		}  
 	
-	case 4:
-	{
-		chees.Elephant();
-		break;
-	}
-	
-	case 5:
-	{
-		chees.Horse();
-		break;
-	}
+		case (QUEEN):
+		{
+			chees.Queen();
+			break;				
+		}
 
-	case 6:
-	{
-		chees.Warrior();
-		break;
-	}
+		case (BOAT):
+		{
+			chees.Boat();
+			break;
+		}
 	
-	default:
-	{
-		cout << "Please enter true name a figure" << endl;		
+		case (ELEPHANT):
+		{
+			chees.Elephant();
+			break;
+		}
+	
+		case (HORSE):
+		{
+			chees.Horse();
+			break;
+		}
+
+		case (WARRIOR):
+		{
+			chees.Warrior();
+			break;
+		}
+		
+		default:
+		{
+			cout << "Please enter true name a figure" << endl;		
+		}
+		
+		cout << "By exit please enter 0." << endl;
+		cout << "By continiu please enter 1." << endl;
+		cin >> exit;
 	}
 }
 return 0;
